@@ -22,22 +22,11 @@
           :key="option">{{option}}</option>
       </select>
     </div>
-
     <!-- add task date dropdown -->
     <div class="toolbar block margin-r">
-      <label for="date-sort" class="pad">Date</label>
-      <select name="date-sort" id="date-sort" v-model="selectedDate">
-        <option value="">all</option>
-        <option
-          v-for="option in dateOptions"
-          :value="option"
-          :key="option">{{option}}</option>
-      </select>
+      <button @click="sortAscending = !sortAscending">Sort</button>
     </div>
-
     <!-- end task date dropdown -->
-
-
     <ul class="task-list-headings">
       <li>Task</li>
       <li>Priority</li>
@@ -79,10 +68,7 @@ export default {
       selectedPriority: '',
       categoryOptions: ['school', 'home', 'work'],
       selectedCategory: '',
-      //added date options in data props
-      dateOptions: ['ascending', 'descending'],
-      selectedDate: '',
-      // end date options data props
+      sortAscending: true
     }
   },
   computed: {
@@ -118,13 +104,14 @@ export default {
           return matched
         })
     },
-
     // add task date functionality
-  sortedDate: function() {
-    return this.date.sort((a, b) => new Date(a.date) - new Date(b.date))
-  }
-  //end task date functionality
-
+    sortedTasks () {
+      return [...this.filteredTasks].sort((a, b) => {
+        const dateOne = new Date(a.dueDate)
+        const dateTwo = new Date(b.dueDate)
+        return this.sortAscending ? (dateOne - dateTwo) : (dateTwo - dateOne)
+      })
+    }
   },
   methods: {
     // Since this component does not own the task list data, we need to
@@ -144,8 +131,6 @@ export default {
 </script>
 
 <style>
-/* We will add styles here later. */
-
 
 .task-item {
   display: grid;

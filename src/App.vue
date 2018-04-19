@@ -38,14 +38,13 @@ export default {
   data () {
     return {
       taskList: [
-        // { id: 1234, title: 'Learn Vue', isComplete: true, priority: 'medium' },
-        // { id: 1235, title: 'Learn Vue Router', isComplete: false, priority: 'medium' },
-        // { id: 1236, title: 'Learn Vuex', isComplete: false, priority: 'medium' },
-        // { id: 1237, title: 'Learn Vue DevTools', isComplete: true, priority: 'medium' }
+        // { id: 1234, title: 'Learn Vue', isComplete: true, priority: 'med' },
+        // { id: 1235, title: 'Learn Vue Router', isComplete: false, priority: 'med' },
+        // { id: 1236, title: 'Learn Vuex', isComplete: false, priority: 'med' },
+        // { id: 1237, title: 'Learn Vue DevTools', isComplete: true, priority: 'med' }
       ]
     }
   },
-
 
   created () {
     this.taskList = JSON.parse(localStorage.getItem('taskList')) || []

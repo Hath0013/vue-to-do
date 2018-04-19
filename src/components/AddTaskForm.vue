@@ -62,7 +62,6 @@ export default {
   }
 }
 
-
 </script>
 
 <style>
@@ -84,13 +83,14 @@ export default {
   }
 
   button {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #fff;
     background-color: #01cdd7;
     border: solid 2px #01cdd7;
     border-radius: 5px;
-    padding: .8rem;
+    padding: .2rem;
+    width: 150px;
   }
 
   label {
@@ -106,21 +106,11 @@ export default {
    display: block;
   }
 
-  button {
-    width: 100%;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-  }
-
 
 @media only screen and (min-width: 38rem) {
 
   .block {
    display: inline-block;
-  }
-
-  button {
-    width: 100%;
   }
 
   input,
@@ -131,6 +121,9 @@ export default {
     padding: .3rem;
   }
 
+  button {
+    width: 250px;
+  }
 }
 
 </style>
