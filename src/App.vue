@@ -30,11 +30,15 @@
 </template>
 
 <script>
+import axios from 'axios'
+import moment from 'moment'
 import AddTaskForm from '@/components/AddTaskForm'
+import LoginPage from '@/pages/LoginPage'
+
 
 export default {
   name: 'App',
-  components: { AddTaskForm },
+  components: { LoginPage, AddTaskForm },
   data () {
     return {
       taskList: [
@@ -42,7 +46,8 @@ export default {
         // { id: 1235, title: 'Learn Vue Router', isComplete: false, priority: 'med' },
         // { id: 1236, title: 'Learn Vuex', isComplete: false, priority: 'med' },
         // { id: 1237, title: 'Learn Vue DevTools', isComplete: true, priority: 'med' }
-      ]
+      ],
+      baseURL: 'https://vue-todos.robertmckenney.ca/api'
     }
   },
 
@@ -52,7 +57,10 @@ export default {
 
   methods: {
     addTask (task) {
-      this.taskList.push(task)
+      axios.post(`${this.baseURL}/todos`, task)
+        .then(response => {
+          this.taskList.push(response.data.data)
+        })
       this.saveTaskList()
     },
 

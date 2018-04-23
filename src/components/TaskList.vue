@@ -106,7 +106,8 @@ export default {
     },
     // add task date functionality
     sortedTasks () {
-      return [...this.filteredTasks].sort((a, b) => {
+      let tempList = [...this.filteredTasks]
+      return tempList.sort((a, b) => {
         const dateOne = new Date(a.dueDate)
         const dateTwo = new Date(b.dueDate)
         return this.sortAscending ? (dateOne - dateTwo) : (dateTwo - dateOne)

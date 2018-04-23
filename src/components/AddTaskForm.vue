@@ -25,6 +25,7 @@
     </div>
     <button @click="addTask">Add Task</button>
   </div>
+
 </template>
 
 <script>
@@ -105,7 +106,6 @@ export default {
   .block {
    display: block;
   }
-
 
 @media only screen and (min-width: 38rem) {
 
