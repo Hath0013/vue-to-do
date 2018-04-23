@@ -58,7 +58,11 @@ export default {
   created () {
     this.taskList = JSON.parse(localStorage.getItem('taskList')) || []
   },
-
+  computed: {
+      isLoggedIn () {
+        return this.api.accessToken && moment(this.api.expiresAt).isAfter()
+      }
+  },
   methods: {
     addTask (task) {
       axios.post(`${this.baseURL}/todos`, task)
