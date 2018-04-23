@@ -121,11 +121,37 @@ export default {
     // and passing up the affected task with the event. We will listen for
     // this event in the parent component and call the appropriate method to
     // make the change to the data.
+    refreshTasks () {
+      axios
+        .get('/todos', this.axiosOptions)
+        .then(response => { this.taskList = response.data.data })
+        .catch(error => { this.handleError(error) })
+    },
+    addTask (task) {
+      axios
+        .post('/todos', task, this.axiosOptions)
+        .then(response => { this.taskList.push(response.data.data) })
+        .catch(error => { this.handleError(error) })
+    },
     toggleDone (task) {
-      this.$emit('toggleDone', task)
+      task.isComplete = !task.isComplete
+      axios
+        .put(`/todos/${task.id}`, task, this.axiosOptions)
+        .catch(error => { this.handleError(error) })
     },
     removeTask (task) {
-      this.$emit('removeTask', task)
+      axios
+        .delete(`/todos/${task.id}`, this.axiosOptions)
+        .then(response => {
+          const taskIndex = this.taskList.findIndex(t => t.id === task.id)
+          this.taskList.splice(taskIndex, 1)
+        })
+        .catch(error => { this.handleError(error) })
+    },
+    handleError(error) {
+      console.log(error)
+      // obviously we want to do something more robust
+      // including notifying the user somehow.
     }
   }
 }
