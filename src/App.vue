@@ -91,6 +91,11 @@ export default {
       this.api.expiresAt = apiTokens.expires_at
       localStorage.setItem('todoApiTokens', JSON.stringify(apiTokens))
       this.refreshTasks()
+    },
+    logout () {
+      this.api.accessToken = null
+      this.api.expiresAt = null
+      localStorage.removeItem('todoApiTokens')
     }
   }
 }
