@@ -54,6 +54,7 @@
       </li>
     </ul>
   </div>
+  <button @click="logout">LOGOUT</button>
 </template>
 
 <script>
@@ -69,7 +70,9 @@ export default {
       categoryOptions: ['school', 'home', 'work'],
       selectedCategory: '',
       sortAscending: true
-    }
+    },
+  created () {
+    this.loadInitialData()
   },
   computed: {
     axiosOptions () {
@@ -158,6 +161,14 @@ export default {
       console.log(error)
       // obviously we want to do something more robust
       // including notifying the user somehow.
+    },
+    loadInitialData () {
+      const apiTokens = JSON.parse(localStorage.getItem('todoApiTokens'))
+      if (apiTokens) {
+        this.api.accessToken = apiTokens.access_token
+        this.api.expiresAt = apiTokens.expires_at
+        if (this.isLoggedIn) this.refreshTasks()
+      }
     }
   }
 }
