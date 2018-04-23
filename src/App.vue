@@ -1,31 +1,35 @@
 <template>
   <div id="app">
-    <!-- We need some navigation links to switch between views -->
-    <nav>
-      <ul>
-        <!--
-          The RouterLink component comes with VueRouter.
-          The 'to' prop is the URL route.
-        -->
-        <li><router-link to="/" exact>All</router-link></li>
-        <li><router-link to="/active">Active</router-link></li>
-        <li><router-link to="/completed">Completed</router-link></li>
-      </ul>
-    </nav>
-    <h1 class="app-title">Vue Todos</h1>
-    <add-task-form @taskAdded="addTask" />
-    <!--
-      The RouterView is a placeholder that VueRouter uses to know
-      where to insert the designated component for a given URL.
-      In this case we are passing our taskList as a prop to each route's
-      component and we are listening for user events.  This way we are still
-      only mainting one master list in the App.vue component.
-     -->
-    <router-view
-      :tasks="taskList"
-      @toggleDone="toggleDone"
-      @removeTask="removeTask"
-    />
+    <div v-if="isLoggedIn">
+
+      <!-- We need some navigation links to switch between views -->
+      <nav>
+        <ul>
+          <!--
+            The RouterLink component comes with VueRouter.
+            The 'to' prop is the URL route.
+          -->
+          <li><router-link to="/" exact>All</router-link></li>
+          <li><router-link to="/active">Active</router-link></li>
+          <li><router-link to="/completed">Completed</router-link></li>
+        </ul>
+      </nav>
+      <h1 class="app-title">Vue Todos</h1>
+      <add-task-form @taskAdded="addTask" />
+      <!--
+        The RouterView is a placeholder that VueRouter uses to know
+        where to insert the designated component for a given URL.
+        In this case we are passing our taskList as a prop to each route's
+        component and we are listening for user events.  This way we are still
+        only mainting one master list in the App.vue component.
+       -->
+      <router-view
+        :tasks="taskList"
+        @toggleDone="toggleDone"
+        @removeTask="removeTask"
+      />
+    </div>
+    <login-page v-else @saveApiTokens="saveApiTokens" />
   </div>
 </template>
 

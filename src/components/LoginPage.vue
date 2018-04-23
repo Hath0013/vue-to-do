@@ -36,8 +36,8 @@ import moment from 'moment'
 axios.post('https://vue-todos.robertmckenney.ca/oauth/token',
   {
     grant_type: 'password',
-    client_id: '2',
-    client_secret: 'TJJiU0ULORMxmpToXaTX4J4qo1cttVJ3nGSkg1xk',
+    client_id: '8',
+    client_secret: 'GYczJqdoACR1NMW9swkvYG73g7o0iZBttQuxdfMb',
     username: this.loginName,
     password: this.password,
     scope: '*'
@@ -67,8 +67,8 @@ export default {
         'https://vue-todos.robertmckenney.ca/oauth/token',
         {
           grant_type: 'password',
-          client_id: '2',
-          client_secret: 'TJJiU0ULORMxmpToXaTX4J4qo1cttVJ3nGSkg1xk',
+          client_id: '8',
+          client_secret: 'GYczJqdoACR1NMW9swkvYG73g7o0iZBttQuxdfMb',
           username: this.loginName,
           password: this.password,
           scope: '*'
