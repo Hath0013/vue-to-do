@@ -81,6 +81,12 @@ export default {
 
     saveTaskList () {
       localStorage.setItem('taskList', JSON.stringify(this.taskList))
+    },
+    saveApiTokens (apiTokens) {
+      this.api.accessToken = apiTokens.access_token
+      this.api.expiresAt = apiTokens.expires_at
+      localStorage.setItem('todoApiTokens', JSON.stringify(apiTokens))
+      this.refreshTasks()
     }
   }
 }
