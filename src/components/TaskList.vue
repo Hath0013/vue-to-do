@@ -72,6 +72,12 @@ export default {
     }
   },
   computed: {
+    axiosOptions () {
+      return {
+        baseURL: this.baseURL,
+        headers: { 'Authorization': `Bearer ${this.api.accessToken}` }
+      }
+    },
     filteredPriorityTasks () {
       // If the selectedFilter is 'all', the value is set to an empty string
       // which will evaluate to false. In that case, we will reuturn the
