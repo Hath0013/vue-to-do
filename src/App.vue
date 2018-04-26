@@ -39,7 +39,6 @@ import moment from 'moment'
 import AddTaskForm from '@/components/AddTaskForm'
 import LoginPage from '@/pages/LoginPage'
 
-
 export default {
   name: 'App',
   components: { LoginPage, AddTaskForm },
@@ -51,7 +50,11 @@ export default {
         // { id: 1236, title: 'Learn Vuex', isComplete: false, priority: 'med' },
         // { id: 1237, title: 'Learn Vue DevTools', isComplete: true, priority: 'med' }
       ],
-      baseURL: 'https://vue-todos.robertmckenney.ca/api'
+      baseURL: 'https://vue-todos.robertmckenney.ca/api',
+      api: {
+        accessToken: null,
+        expiresAt: null
+      }
     }
   },
 
@@ -59,9 +62,9 @@ export default {
     this.taskList = JSON.parse(localStorage.getItem('taskList')) || []
   },
   computed: {
-      isLoggedIn () {
-        return this.api.accessToken && moment(this.api.expiresAt).isAfter()
-      }
+    isLoggedIn () {
+      return this.api.accessToken && moment(this.api.expiresAt).isAfter()
+    }
   },
   methods: {
     addTask (task) {
@@ -82,7 +85,6 @@ export default {
       this.taskList.splice(taskIndex, 1)
       this.saveTaskList()
     },
-
     saveTaskList () {
       localStorage.setItem('taskList', JSON.stringify(this.taskList))
     },
@@ -91,11 +93,6 @@ export default {
       this.api.expiresAt = apiTokens.expires_at
       localStorage.setItem('todoApiTokens', JSON.stringify(apiTokens))
       this.refreshTasks()
-    },
-    logout () {
-      this.api.accessToken = null
-      this.api.expiresAt = null
-      localStorage.removeItem('todoApiTokens')
     }
   }
 }

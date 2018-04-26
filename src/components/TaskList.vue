@@ -53,11 +53,12 @@
         <span class="far fa-trash-alt" @click="removeTask(task)"></span>
       </li>
     </ul>
+    <button @click="logout">LOGOUT</button>
   </div>
-  <button @click="logout">LOGOUT</button>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   // We are not actually managing the task list in this component.
   // We are only displaying the list. The parent component (App.vue) is
@@ -70,7 +71,8 @@ export default {
       categoryOptions: ['school', 'home', 'work'],
       selectedCategory: '',
       sortAscending: true
-    },
+    }
+  },
   created () {
     this.loadInitialData()
   },
@@ -157,7 +159,7 @@ export default {
         })
         .catch(error => { this.handleError(error) })
     },
-    handleError(error) {
+    handleError (error) {
       console.log(error)
       // obviously we want to do something more robust
       // including notifying the user somehow.
@@ -169,6 +171,11 @@ export default {
         this.api.expiresAt = apiTokens.expires_at
         if (this.isLoggedIn) this.refreshTasks()
       }
+    },
+    logout () {
+      this.api.accessToken = null
+      this.api.expiresAt = null
+      localStorage.removeItem('todoApiTokens')
     }
   }
 }

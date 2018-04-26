@@ -29,26 +29,10 @@
   </form>
 </template>
 
-
 <script>
+/* eslint-disable */
+import axios from 'axios'
 import moment from 'moment'
-
-axios.post('https://vue-todos.robertmckenney.ca/oauth/token',
-  {
-    grant_type: 'password',
-    client_id: '8',
-    client_secret: 'GYczJqdoACR1NMW9swkvYG73g7o0iZBttQuxdfMb',
-    username: this.loginName,
-    password: this.password,
-    scope: '*'
-  }
-),
-.then(response => {
-  this.$emit('saveApiTokens', response.data)
-  this.loginName = null
-  this.password = null
-}),
-
 
 export default {
   data () {
@@ -59,6 +43,7 @@ export default {
       isWorking: false
     }
   },
+
   methods: {
     login () {
       this.errorMessage = ''
@@ -87,8 +72,6 @@ export default {
       })
       .catch(error => this.handleError(error))
       .finally(() => { this.isWorking = false })
-
-
       // send credentials to the OAuth2 server
       // get back an access_token
       // save the token
@@ -107,8 +90,9 @@ export default {
             this.errorMessage = 'Incorrect username or password'
             break
           }
-          default:
+          default: {
             this.errorMessage = 'Sorry. There was an error processing your request.'
+          }
         }
       } else if (error.request) {
         // The request was made but no response was received
